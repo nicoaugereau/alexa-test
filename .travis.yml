@@ -1,14 +1,19 @@
 language: node_js
 
 node_js: 
-    - "stable"
+  - "stable"
+
+env:
+  - GIT_BRANCH=master
+
 cache:
   directories:
     - "$HOME/.npm"
 
 before_script:
-    - npm ci
+  - git clone --depth=1 --branch=$GIT_BRANCH https://github.com/nicoaugereau/alexa-test.git nicoaugereau/alexa-test && cd nicoaugereau/alexa-test
+  - npm ci
 
 script:
-    - mocha test/about.js
-    - mocha test/frontpagedeals.js
+  - mocha test/about.js
+  - mocha test/frontpagedeals.js
